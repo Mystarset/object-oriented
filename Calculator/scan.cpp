@@ -1,18 +1,18 @@
- /************************************************************ 
+ï»¿ /************************************************************ 
   FileName: scan.cpp  
 
   Author: Starset        Version :  1.0        Date:  2015.3.7
 
   Description:      
   
-               ¶Ô½ÓÊÕµÄÊı¾İ½øĞĞÅĞ¶Ï¸ñÊ½ÊÇ·ñÕıÈ·£¬²¢½«Êı¾İ·Ö¿éµÄÒ»¸ö¸ö·ÅÈë¶ÓÁĞÖĞ 
+               å¯¹æ¥æ”¶çš„æ•°æ®è¿›è¡Œåˆ¤æ–­æ ¼å¼æ˜¯å¦æ­£ç¡®ï¼Œå¹¶å°†æ•°æ®åˆ†å—çš„ä¸€ä¸ªä¸ªæ”¾å…¥é˜Ÿåˆ—ä¸­ 
 
   Function List:
             
-			   Scan () ¶Ô±äÁ¿³õÊ¼»¯
-			   ~Scan () Çå¿Õ¶ÓÁĞ
-			   ToStringQueue() Öğ¸öÉ¨Ãè×Ö·û´®£¬ÅĞ¶ÏÊäÈëÊı¾İ×¼È·ĞÔµÄÍ¬Ê±°ÑÊı¾İ·Ö¿ª·ÅÈë¶ÓÁĞ
-			   BackStringQueue ·µ»Ø¶ÓÁĞµÄÖµ 
+			   Scan () å¯¹å˜é‡åˆå§‹åŒ–
+			   ~Scan () æ¸…ç©ºé˜Ÿåˆ—
+			   ToStringQueue() é€ä¸ªæ‰«æå­—ç¬¦ä¸²ï¼Œåˆ¤æ–­è¾“å…¥æ•°æ®å‡†ç¡®æ€§çš„åŒæ—¶æŠŠæ•°æ®åˆ†å¼€æ”¾å…¥é˜Ÿåˆ—
+			   BackStringQueue è¿”å›é˜Ÿåˆ—çš„å€¼ 
 
 *************************************************************/ 
 
@@ -26,12 +26,12 @@ using namespace std;
  
 Scan::Scan()
 {
-	error = true;  //³õÊ¼»¯ 
+	error = true;  //åˆå§‹åŒ– 
 }
 
 Scan::~Scan()
 {
-   while (!que->empty()) que->pop();  //Çå¿Õ¶ÓÁĞ 
+   while (!que->empty()) que->pop();  //æ¸…ç©ºé˜Ÿåˆ— 
    	
    delete que;
 
@@ -42,7 +42,7 @@ void Scan::ToStringQueue(string input)
 {
 	int i;
 	string date="";
-	stack<string>stk;  //ĞÂ½¨Ò»¸öÕ»ÓÃÓÚÅĞ¶ÏÀ¨ºÅÊÇ·ñÆ¥Åä 
+	stack<string>stk;  //æ–°å»ºä¸€ä¸ªæ ˆç”¨äºåˆ¤æ–­æ‹¬å·æ˜¯å¦åŒ¹é… 
 	
 	for ( i=0; i<input.size(); i++)
 	 {
@@ -50,7 +50,7 @@ void Scan::ToStringQueue(string input)
 	 	 {
 	 	 	date += input [i];
 	 	 	
-	 	 	if (date.size() > 10 )  // Êı×ÖÎ»Êı´óÓÚ10Î»Ê±±¨´í 
+	 	 	if (date.size() > 10 )  // æ•°å­—ä½æ•°å¤§äº10ä½æ—¶æŠ¥é”™ 
 			  { 
 			     error = false;  
 			     break;
@@ -60,18 +60,18 @@ void Scan::ToStringQueue(string input)
 	 	if (input[i] == '+' || input [i] == '-' || input [i] == '*' || input[i] == '/' || input[i] == '(' || input [i] == ')')
 	 	 {
 	 	    
-	 	    if (date != "")   // °ÑÊı×ÖÈë¶Ó 
+	 	    if (date != "")   // æŠŠæ•°å­—å…¥é˜Ÿ 
 			 {
 			    que->push (date);
 		        date="";
 		     }
 		    date += input[i];
 	
-		    que->push (date);   // °Ñ·ûºÏÈë¶Ó 
+		    que->push (date);   // æŠŠç¬¦åˆå…¥é˜Ÿ 
 		    
 		    
 			 
-		    if (input[i] == '(')      // ÅĞ¶ÏÀ¨ºÅÊÇ·ñÆ¥Åä 
+		    if (input[i] == '(')      // åˆ¤æ–­æ‹¬å·æ˜¯å¦åŒ¹é… 
 			  stk.push (date);
 			 
 			date="";
@@ -85,19 +85,19 @@ void Scan::ToStringQueue(string input)
 		 
 	 }
 	
-	if (date != "" )  que->push(date);  //Èç¹û×îºóÒ»¸öÊı¾İÊÇÊı×ÖÔò°ÑÕâ¸öÊı×ÖÈë¶Ó 
+	if (date != "" )  que->push(date);  //å¦‚æœæœ€åä¸€ä¸ªæ•°æ®æ˜¯æ•°å­—åˆ™æŠŠè¿™ä¸ªæ•°å­—å…¥é˜Ÿ 
 	
-	if (!stk.empty())  error = false;  //Èç¹ûÀ¨ºÅ²»Æ¥Åä±¨´í 
+	if (!stk.empty())  error = false;  //å¦‚æœæ‹¬å·ä¸åŒ¹é…æŠ¥é”™ 
 	
-	while (!stk.empty()) stk.pop();   //Çå¿ÕÕ» 
+	while (!stk.empty()) stk.pop();   //æ¸…ç©ºæ ˆ 
 }
 
 queue<string> *Scan::BackStringQueue()
 {
-	if (error) // Èç¹ûÃ»ÓĞ±¨´í·µ»Ø¶ÓÁĞµÄÖµ 
+	if (error) // å¦‚æœæ²¡æœ‰æŠ¥é”™è¿”å›é˜Ÿåˆ—çš„å€¼ 
 	   return que;  
 	else 
-	   return NULL; //Èç¹û±¨´íÔò·µ»Ø¿Õ 
+	   return NULL; //å¦‚æœæŠ¥é”™åˆ™è¿”å›ç©º 
 }
 
 

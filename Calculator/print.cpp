@@ -1,15 +1,15 @@
- /************************************************************ 
+ï»¿ /************************************************************ 
   FileName: print.cpp  
 
   Author: Starset        Version :  1.0        Date:  2015.3.7
 
   Description:      
               
-              Êä³öÊı¾İ 
+              è¾“å‡ºæ•°æ® 
 
   Function List:
               
-              StringPrint() Êä³ö 
+              StringPrint() è¾“å‡º 
 
 *************************************************************/ 
 
@@ -32,7 +32,7 @@ Print::~Print()
 
 void Print::StringPrint(queue<string> *output)
 {
-	while (!output->empty())   // Êä³ö 
+	while (!output->empty())   // è¾“å‡º 
 	 {
 	 	cout << output->front() << endl;
 	 	output->pop();
