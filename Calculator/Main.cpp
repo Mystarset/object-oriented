@@ -1,16 +1,16 @@
-ï»¿ /************************************************************ 
+ /************************************************************ 
   FileName: Main.cpp  
 
   Author: Starset        Version :  1.0        Date:  2016.3.7
 
   Description:      
   
-               è¾“å…¥ä¸€ä¸ªå››åˆ™è¿ç®—è¡¨è¾¾å¼ï¼Œé€ä¸ªå­—ç¬¦æ‰«ææå–è¾“å‡º 
-               å½“è¾“å…¥exitæ—¶ ç»“æŸç¨‹åº 
+               ÊäÈëÒ»¸öËÄÔòÔËËã±í´ïÊ½£¬Öğ¸ö×Ö·ûÉ¨ÃèÌáÈ¡Êä³ö 
+               µ±ÊäÈëexitÊ± ½áÊø³ÌĞò 
 
   Function List:
             
-			   int main() ä¸»ç¨‹åº å®ç°è¾“å…¥è¾“å‡ºçš„è°ƒç”¨ 
+			   int main() Ö÷³ÌĞò ÊµÏÖÊäÈëÊä³öµÄµ÷ÓÃ 
 
 *************************************************************/ 
 
@@ -26,7 +26,7 @@ int main()
 {
 	
       
-      bool run=true;    // åˆ¤æ–­ä»£ç æ˜¯å¦ç»§ç»­è¿è¡Œçš„å˜é‡ 
+      bool run=true;    // ÅĞ¶Ï´úÂëÊÇ·ñ¼ÌĞøÔËĞĞµÄ±äÁ¿ 
       
       while (run) 
         {
@@ -34,25 +34,25 @@ int main()
 			Scan *get = new Scan;
             Print *wri = new Print;
         	
-        	cout << "è¯·è¾“å…¥å››åˆ™è¿ç®—è¡¨è¾¾å¼:" << endl ;
+        	cout << "ÇëÊäÈëËÄÔòÔËËã±í´ïÊ½:" << endl ;
         	
-        	string str;   // ç”¨äºå‚¨å­˜è¾“å…¥æ•°æ®çš„å˜é‡ 
+        	string str;   // ÓÃÓÚ´¢´æÊäÈëÊı¾İµÄ±äÁ¿ 
         	
         	cin >> str;
         	
-        	if (str == "exit") run = false ; // åˆ¤æ–­æ˜¯å¦ç»“æŸ 
+        	if (str == "exit") run = false ; // ÅĞ¶ÏÊÇ·ñ½áÊø 
         	
 			else
 			 {
-			 	 get->ToStringQueue(str);  //å¾—åˆ°é˜Ÿåˆ— 
+			 	 get->ToStringQueue(str);  //µÃµ½¶ÓÁĞ 
 			 	 
-			 	 if (get->BackStringQueue() != NULL)   //åˆ¤æ–­æ•°æ®æ˜¯å¦åˆæ³• 
+			 	 if (get->BackStringQueue() != NULL)   //ÅĞ¶ÏÊı¾İÊÇ·ñºÏ·¨ 
 			 	    
-					 wri->StringPrint(get->BackStringQueue());  // åˆæ³•æ—¶çš„è¾“å‡º 
+					 wri->StringPrint(get->BackStringQueue());  // ºÏ·¨Ê±µÄÊä³ö 
 			 	 
 				 else
 			 	  	 
-					 cout << "Error!" << endl;  //  ä¸åˆæ³•æ—¶çš„è¾“å‡º 
+					 cout << "Error!" << endl;  //  ²»ºÏ·¨Ê±µÄÊä³ö 
 			 	  	 
 			 } 
 			 
