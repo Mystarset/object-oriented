@@ -31,73 +31,95 @@ Scan::Scan()
 
 Scan::~Scan()
 {
-   while (!que->empty()) que->pop();  //清空队列 
-   	
-   delete que;
+    while (!que->empty()) 
+	{
+		que->pop();  //清空队列 
+    }
+    
+	delete que;
 
 }
 
 
 void Scan::ToStringQueue(string input)
 {
-	int i;
+    int i;
 	string date="";
 	stack<string>stk;  //新建一个栈用于判断括号是否匹配 
 	
-	for ( i=0; i<input.size(); i++)
-	 {
-	 	if (input[i] == '.' || (input[i] >= '0' && input[i] <= '9' ) )
-	 	 {
+	for (i = 0; i < input.size(); i++)
+	{
+	 	if (input[i] == '.' || (input[i] >= '0' && input[i] <= '9'))
+	 	{
 	 	 	date += input [i];
 	 	 	
 	 	 	if (date.size() > 10 )  // 数字位数大于10位时报错 
-			  { 
-			     error = false;  
-			     break;
-			  }
-	 	 }
+			    { 
+			        error = false;  
+			        break;
+			    }
+	 	}
 	 	
-	 	if (input[i] == '+' || input [i] == '-' || input [i] == '*' || input[i] == '/' || input[i] == '(' || input [i] == ')')
-	 	 {
+	 	if (input[i] == '+' || input [i] == '-' || input [i] == '*' 
+		   || input[i] == '/' || input[i] == '(' || input [i] == ')')
+	 	
+		{
 	 	    
 	 	    if (date != "")   // 把数字入队 
-			 {
-			    que->push (date);
+			{
+			    que->push(date);
 		        date="";
-		     }
-		    date += input[i];
-	
+		    }
+		            
+			date += input[i];
+
 		    que->push (date);   // 把符合入队 
 		    
 		    
-			 
-		    if (input[i] == '(')      // 判断括号是否匹配 
-			  stk.push (date);
-			 
+			if (input[i] == '(')      // 判断括号是否匹配 
+			{            
+				stk.push (date);
+		    }
+			    
 			date="";
 			
 			if (input[i] == ')')
-			  {
-			  	 if (stk.top() == "(" )
-				    stk.pop(); 
-			  } 
-		 }
+			{
+			  	if (stk.top() == "(" )
+			  	{
+				    stk.pop();
+				}
+			} 
+		}
 		 
-	 }
+	}
 	
-	if (date != "" )  que->push(date);  //如果最后一个数据是数字则把这个数字入队 
+	if (date != "" )  
+    {
+	    que->push(date);  //如果最后一个数据是数字则把这个数字入队 
+    }
 	
-	if (!stk.empty())  error = false;  //如果括号不匹配报错 
+	if (!stk.empty()) 
+	{
+	    error = false;  //如果括号不匹配报错 
+    } 
 	
-	while (!stk.empty()) stk.pop();   //清空栈 
+	while (!stk.empty()) 
+	{
+	    stk.pop();   //清空栈 
+    }
 }
 
 queue<string> *Scan::BackStringQueue()
 {
 	if (error) // 如果没有报错返回队列的值 
-	   return que;  
+	{
+	    return que;  
+    }
 	else 
-	   return NULL; //如果报错则返回空 
+	{
+	    return NULL; //如果报错则返回空 
+    }
 }
 
 

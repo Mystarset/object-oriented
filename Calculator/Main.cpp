@@ -26,40 +26,41 @@ int main()
 {
 	
       
-      bool run=true;    // 判断代码是否继续运行的变量 
+    bool run=true;    // 判断代码是否继续运行的变量 
       
-      while (run) 
-        {
+    while (run) 
+    {
         	
-			Scan *get = new Scan;
-            Print *wri = new Print;
+	    Scan *get = new Scan;
+        Print *wri = new Print;
         	
-        	cout << "请输入四则运算表达式:" << endl ;
+        cout << "请输入四则运算表达式:" << endl ;
         	
-        	string str;   // 用于储存输入数据的变量 
+        string str;   // 用于储存输入数据的变量 	
+        cin >> str;
         	
-        	cin >> str;
-        	
-        	if (str == "exit") run = false ; // 判断是否结束 
-        	
+        if (str == "exit") 
+		{ 
+			run = false ; // 判断是否结束 
+        } 
+		else
+		{
+		    get->ToStringQueue(str);  //得到队列 
+			 	 
+			if (get->BackStringQueue() != NULL)   //判断数据是否合法 
+			{ 
+				wri->StringPrint(get->BackStringQueue());  // 合法时的输出 
+			} 
 			else
-			 {
-			 	 get->ToStringQueue(str);  //得到队列 
-			 	 
-			 	 if (get->BackStringQueue() != NULL)   //判断数据是否合法 
-			 	    
-					 wri->StringPrint(get->BackStringQueue());  // 合法时的输出 
-			 	 
-				 else
-			 	  	 
-					 cout << "Error!" << endl;  //  不合法时的输出 
-			 	  	 
-			 } 
+			{ 	  	 
+				cout << "Error!" << endl;  //  不合法时的输出 
+		    }
+		} 
 			 
 			delete get;
 			delete wri;
-        }
-
+			
+    }
 
     return 0;	
 	

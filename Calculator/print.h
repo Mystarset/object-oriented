@@ -8,7 +8,7 @@ using namespace std;
 
 class Print
 {
-	private:
+    private:
 		
 	public:
 		Print();

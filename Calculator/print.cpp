@@ -32,11 +32,11 @@ Print::~Print()
 
 void Print::StringPrint(queue<string> *output)
 {
-	while (!output->empty())   // Êä³ö 
-	 {
+    while (!output->empty())   // Êä³ö 
+	{
 	 	cout << output->front() << endl;
 	 	output->pop();
-	 }
+	}
 }
 
 

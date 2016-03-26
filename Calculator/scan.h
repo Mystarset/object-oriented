@@ -8,7 +8,7 @@ using namespace std;
 
 class Scan
 {
-	private:
+    private:
 		queue<string> *que = new queue<string>;
 		bool error;
 	
