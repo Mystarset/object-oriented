@@ -1,11 +1,12 @@
  /************************************************************ 
   FileName: scan.cpp  
 
-  Author: Starset        Version :  1.0        Date:  2016.3.7
+  Author: Starset        Version :  1.1        Date:  2016.4.3
 
   Description:      
   
-               对接收的数据进行判断格式是否正确，并将数据分块的一个个放入队列中 
+               对接收的数据进行判断格式是否正确，并将数据分块的一个个放入队列中
+			   对负数和减号进行区分 
 
   Function List:
             
@@ -16,7 +17,7 @@
 
 *************************************************************/ 
 
-#include "scan.h"
+#include "Scan.h"
 
 #include <stack>
 #include <queue>
@@ -41,19 +42,31 @@ Scan::~Scan()
 }
 
 
+bool check(char c)   //判断是否是运算符 
+{
+	if (c == '+' || c == '-' || c == '*' 
+		|| c == '/' || c == '(' || c == ')')
+	{
+	    return false;
+	} 
+    return true;
+}
+
+
 void Scan::ToStringQueue(string input)
 {
     int i;
-	string date="";
+	string data="";    //当前的数据 
+	string opr="";     //用于区分负数与减号 
 	stack<string>stk;  //新建一个栈用于判断括号是否匹配 
 	
 	for (i = 0; i < input.size(); i++)
 	{
 	 	if (input[i] == '.' || (input[i] >= '0' && input[i] <= '9'))
 	 	{
-	 	 	date += input [i];
+	 	 	data += input [i];
 	 	 	
-	 	 	if (date.size() > 10 )  // 数字位数大于10位时报错 
+	 	 	if (data.size() > 10 )  // 数字位数大于10位时报错 
 			    { 
 			        error = false;  
 			        break;
@@ -65,38 +78,59 @@ void Scan::ToStringQueue(string input)
 	 	
 		{
 	 	    
-	 	    if (date != "")   // 把数字入队 
+	 	    if (data != "")   // 把数字入队 
 			{
-			    que->push(date);
-		        date="";
+			    que->push(opr+data);
+		        data = "";
+		        opr = "";
 		    }
 		            
-			date += input[i];
+			data += input[i];
 
-		    que->push (date);   // 把符合入队 
+		    if (input[i] == '-')  //对'-'进行特殊判断 
+		    {
+		    	if (i == 0)
+		    	    opr = "-";
+		    	if (i!=0)
+				    if  (!check(input[i-1]) && check(input[i+1]))
+		    	        opr = "-";
+		    	    else
+		    	        que->push (data);
+		    }
+		    else
+			    que->push (data);   // 把符号入队 
 		    
 		    
 			if (input[i] == '(')      // 判断括号是否匹配 
 			{            
-				stk.push (date);
+				stk.push (data);
 		    }
 			    
-			date="";
+			data="";
 			
 			if (input[i] == ')')
 			{
-			  	if (stk.top() == "(" )
-			  	{
-				    stk.pop();
+				if (stk.empty())
+				{
+					error = false;
 				}
+				else
+			  	    if (stk.top() == "(" )
+			  	    {
+				        stk.pop();
+				    }
+				    else
+				    {
+				    	error = false;
+				    }
 			} 
 		}
 		 
 	}
 	
-	if (date != "" )  
+	if (data != "" )  
     {
-	    que->push(date);  //如果最后一个数据是数字则把这个数字入队 
+	    que->push(opr+data);  //如果最后一个数据是数字则把这个数字入队 
     }
 	
 	if (!stk.empty()) 

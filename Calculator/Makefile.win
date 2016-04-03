@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = Main.o scan.o print.o
-LINKOBJ  = Main.o scan.o print.o
+OBJ      = Main.o scan.o print.o calculation.o checkrelation.o operation.o
+LINKOBJ  = Main.o scan.o print.o calculation.o checkrelation.o operation.o
 LIBS     = -L"E:/Dev-Cpp/MinGW64/lib" -L"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
 CXXINCS  = -I"E:/Dev-Cpp/MinGW64/include" -I"E:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"E:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
@@ -32,3 +32,12 @@ scan.o: scan.cpp
 
 print.o: print.cpp
 	$(CPP) -c print.cpp -o print.o $(CXXFLAGS)
+
+calculation.o: calculation.cpp
+	$(CPP) -c calculation.cpp -o calculation.o $(CXXFLAGS)
+
+checkrelation.o: checkrelation.cpp
+	$(CPP) -c checkrelation.cpp -o checkrelation.o $(CXXFLAGS)
+
+operation.o: operation.cpp
+	$(CPP) -c operation.cpp -o operation.o $(CXXFLAGS)
