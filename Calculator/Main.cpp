@@ -65,7 +65,7 @@ int main(int argc,char* argv[])
 				
 				if (checkprint)    // 判断是否需要输出表达式 
 				{
-					cout << str << " = ";
+					cout << str << "= ";
 				}
 				
 				cal->PrintAnser();

@@ -2,6 +2,7 @@
 #define CALCULATION_H
 
 #include "Operation.h"
+#include "Checkrelation.h" 
 
 #include <queue>
 #include <string>
