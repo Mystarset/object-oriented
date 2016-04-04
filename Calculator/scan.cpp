@@ -92,7 +92,7 @@ void Scan::ToStringQueue(string input)
 		    	if (i == 0)
 		    	    opr = "-";
 		    	if (i!=0)
-				    if  (!check(input[i-1]) && check(input[i+1]))
+				    if  (!check(input[i-1]) && check(input[i+1]) && input[i-1] != ')')
 		    	        opr = "-";
 		    	    else
 		    	        que->push (data);
