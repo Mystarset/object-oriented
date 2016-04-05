@@ -90,20 +90,40 @@ void Scan::ToStringQueue(string input)
 		    if (input[i] == '-')  //对'-'进行特殊判断 
 		    {
 		    	if (i == 0)
-		    	    opr = "-";
-		    	if (i!=0)
-				    if  (!check(input[i-1]) && check(input[i+1]) && input[i-1] != ')')
+		    	{
+		    	    if (check(input[i+1]))
+		    	    {
 		    	        opr = "-";
+		    	    }
 		    	    else
-		    	        que->push (data);
-		    }
+		    	    {
+		    	        que->push(data);
+		    	    }
+			    }
+				else
+				{
+		    	    if (i!=0)
+		    	    {
+				        if  (!check(input[i-1]) && check(input[i+1]) && input[i-1] != ')')
+		    	        {
+					        opr = "-";
+		    	        }
+						else
+		    	        {
+						    que->push (data);
+		                }
+					}
+				}
+			}
 		    else
+		    {
 			    que->push (data);   // 把符号入队 
-		    
+		    }
 		    
 			if (input[i] == '(')      // 判断括号是否匹配 
 			{            
 				stk.push (data);
+				opr = "";
 		    }
 			    
 			data="";

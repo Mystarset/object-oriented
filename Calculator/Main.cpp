@@ -35,7 +35,7 @@ int main(int argc,char* argv[])
     {
         	
 	    Scan *get = new Scan;
-        Print *wri = new Print;
+        //Print *wri = new Print;
         Calculation *cal = new Calculation;
 			
         cout << "请输入四则运算表达式:" << endl ;
@@ -78,7 +78,7 @@ int main(int argc,char* argv[])
 		} 
 			 
 			delete get;
-			delete wri;
+			//delete wri;
 			delete cal; 
     }
 
