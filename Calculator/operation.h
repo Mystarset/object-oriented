@@ -8,7 +8,7 @@ using namespace std;
 class Operation
 {
 	private:
-		 
+				 
 	public:
 		Operation();
 		~Operation();

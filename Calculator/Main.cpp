@@ -29,14 +29,15 @@ int main(int argc,char* argv[])
 	
       
     bool run = true;    // 判断代码是否继续运行的变量 
-    bool checkprint = false;      // 判断输出是否需要输出表达式 
+          // 判断输出是否需要输出表达式 
       
     while (run) 
     {
-        	
+        
 	    Scan *get = new Scan;
         //Print *wri = new Print;
         Calculation *cal = new Calculation;
+		bool checkprint = false;
 			
         cout << "请输入四则运算表达式:" << endl ;
         	
@@ -54,7 +55,7 @@ int main(int argc,char* argv[])
 			    cin >> str;
 			    checkprint = true;
 			}
-			
+		
 		    get->ToStringQueue(str);  //得到队列 
 			 	 
 			if (get->BackStringQueue() != NULL)   //判断数据是否合法 

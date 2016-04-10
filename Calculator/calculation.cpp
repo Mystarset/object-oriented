@@ -20,11 +20,12 @@
 #include <stack>
 #include <queue>
 #include <string>
-
+#define N 1e9
 using namespace std;
 
 Calculation::Calculation()
 {
+	error = 0;
 }
 
 Calculation::~Calculation()
@@ -41,8 +42,6 @@ Calculation::~Calculation()
     
     delete StaNum;
     delete StaOpr;
-    delete che;
-    delete oper;
 }
 
 
@@ -83,6 +82,15 @@ void Calculation::NumCalculator(queue<string> *data)
             	StaOpr->pop();
             	double temp = oper->Operate(sum1,sum2,oprt);  // 计算结果 
             	
+            	if (temp > N) 
+            	{
+            		error = 1;
+            	}
+            	if (oprt == "/" && sum2 == 0)
+            	{
+            		error = 2;
+            	}
+            	
             	StaNum->push(temp);  //把结果录入数字栈 
             }
 		}        
@@ -92,9 +100,27 @@ void Calculation::NumCalculator(queue<string> *data)
 	    	nowopr = data->front();   
 	    	data->pop();
 	    }
+	    if (error)
+	    {
+	    	break;
+	    }
 	}
 }
 void Calculation::PrintAnser()
 {
-	cout << StaNum->top() << endl;   //输出 
+	if (error == 1) 
+	{
+		printf("数字超出运算范围\n"); 
+	}
+
+    if (error == 2)
+    {
+        printf("数字被零除\n");
+    }
+    
+    if (error == 0)
+	{
+	    cout << StaNum->top() << endl;   //输出 
+    } 
+
 }

@@ -7,6 +7,7 @@
 #include <queue>
 #include <string>
 #include <stack>
+#include <iostream>
 using namespace std;
 
 class Calculation
@@ -16,6 +17,7 @@ class Calculation
 		stack<string> *StaOpr = new stack<string>;   //该栈用于存储操作符 
         CheckRelation *che = new CheckRelation;      //用于判定操作符之间的优先级 
         Operation *oper = new Operation;             //计算 
+        int error;                                   //判断错误类型 
 
 	public:
 		Calculation();
