@@ -20,6 +20,7 @@
 #include "Calculation.h"
 
 #include <iostream>
+#include <string.h>
 #include <string>
 
 using namespace std;
@@ -39,49 +40,75 @@ int main(int argc,char* argv[])
         Calculation *cal = new Calculation;
 		bool checkprint = false;
 			
-        cout << "请输入四则运算表达式:" << endl ;
+        
+        
+        string str="\0";   // 用于储存输入数据的变量 
+        
+       	if (argc != 2 && argc != 3)
+       	{
+       		cout << "请输入四则运算表达式:" << endl ;
+            cin >> str;
         	
-        string str;   // 用于储存输入数据的变量 	
-        cin >> str;
-        	
-        if (str == "exit") 
-		{ 
-			run = false ; // 判断是否结束 
-        } 
-		else
-		{
-			if (str == "-a")      
-			{
-			    cin >> str;
-			    checkprint = true;
-			}
-		
-		    get->ToStringQueue(str);  //得到队列 
+            if (str == "exit") 
+		    { 
+			    run = false ; // 判断是否结束 
+			    break;
+            }  
+		    else
+		    {
+			    if (str == "-a")      
+			    {
+			        cin >> str;
+			        checkprint = true;
+			    }
+	        }
+	    }
+	    else
+	    {
+	        if (argc == 3)
+	        {
+	            checkprint = true;
+	    	    str = argv[2];
+	        }
+	        else
+	        {
+	    	    str = argv[1];	    		
+	        }
+	    }
+	    
+		get->ToStringQueue(str);  //得到队列 
 			 	 
-			if (get->BackStringQueue() != NULL)   //判断数据是否合法 
-			{ 
-				//wri->StringPrint(get->BackStringQueue());  // 合法时的输出 
+		if (get->BackStringQueue() != NULL)   //判断数据是否合法 
+		{ 
+			//wri->StringPrint(get->BackStringQueue());  // 合法时的输出 
 				
-				cal->NumCalculator(get->BackStringQueue());   // 计算表达式 
+			cal->NumCalculator(get->BackStringQueue());   // 计算表达式 
 				
-				if (checkprint)    // 判断是否需要输出表达式 
-				{
-					cout << str << "= ";
-				}
+			if (checkprint)    // 判断是否需要输出表达式 
+			{
+				cout << str << "= ";
+			}
 				
-				cal->PrintAnser();
+			cal->PrintAnser();
 			
-			} 
-			else
-			{ 	  	 
-				cout << "Error!" << endl;  //  不合法时的输出 
-		    }
 		} 
+		else
+		{ 	  	 
+			cout << "Error!" << endl;  //  不合法时的输出 
+		}
+		
+		delete get;
+		//delete wri;
+		delete cal; 
+		
+		if (argc == 2 || argc == 3)
+		{
+		    break;
+		}
+	} 
 			 
-			delete get;
-			//delete wri;
-			delete cal; 
-    }
+
+    
 
     return 0;	
 	
