@@ -92,6 +92,11 @@ void Pretreatment::yuchuli(queue<string> *inque)
 			        {
 			        	backque->push("0");
 			        	backque->push("+");
+			        	if (input[i+1] == "(")
+						{
+							backque->push("1");
+							backque->push("*");
+						} 
 			        }
 			    }
 		       
@@ -102,10 +107,32 @@ void Pretreatment::yuchuli(queue<string> *inque)
 			    {
 			        backque->push("0");
 			        backque->push("-");
+			        if (input[i+1] == "(")
+					{
+						backque->push("1");
+						backque->push("*");
+					} 			        
 			    }
 			    else
 			    {
-		    	    backque->push("-");
+			    	if (input[i+1] == "(")
+			    	{
+			    		if (check(c))
+						{
+							backque->push("-");
+							backque->push("1");
+						} 
+						else
+						{
+			    		    backque->push("-1");
+			    		}
+			    		
+						backque->push("*");
+			    	}
+			    	else
+			    	{
+		    	        backque->push("-");
+		    	    }
 		    	}
 		    	
 		    }
@@ -142,6 +169,11 @@ void Pretreatment::yuchuli(queue<string> *inque)
 		
 		i++;
 	}
+	/*while (!backque->empty())
+	{
+		cout << backque->front() << endl;
+		backque->pop();
+	}*/
 	
 }
 queue<string> *Pretreatment::BackStringQueue()
