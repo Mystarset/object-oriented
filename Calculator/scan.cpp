@@ -55,13 +55,15 @@ bool check(char c)   //判断是否是运算符
 
 void Scan::ToStringQueue(string input)
 {
-    int i;
+    int i = 0;
 	string data="";    //当前的数据 
 	string opr="";     //用于区分负数与减号 
 	stack<string>stk;  //新建一个栈用于判断括号是否匹配 
 	
-	for (i = 0; i < input.size(); i++)
+	while(i < input.size())
 	{
+		
+		
 	 	if (input[i] == '.' || (input[i] >= '0' && input[i] <= '9'))
 	 	{
 	 	 	data += input [i];
@@ -118,7 +120,7 @@ void Scan::ToStringQueue(string input)
 		    else
 		    {
 			    que->push (data);   // 把符号入队 
-		    }
+			}
 		    
 			if (input[i] == '(')      // 判断括号是否匹配 
 			{            
@@ -143,8 +145,11 @@ void Scan::ToStringQueue(string input)
 				    {
 				    	error = false;
 				    }
+				
 			} 
 		}
+		
+		i++;
 		 
 	}
 	
@@ -172,6 +177,7 @@ queue<string> *Scan::BackStringQueue()
     }
 	else 
 	{
+		printf("ERROR!\n");
 	    return NULL; //如果报错则返回空 
     }
 }

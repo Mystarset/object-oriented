@@ -16,6 +16,7 @@
 #include "Calculation.h"
 #include "CheckRelation.h"
 #include "Operation.h"
+#include "Pretreatment.h"
 
 #include <stack>
 #include <queue>
@@ -49,7 +50,6 @@ void Calculation::NumCalculator(queue<string> *data)
 {
 	data->push("#");    //在队头队尾各加入一个#号，用于判断表达式是否计算结束 
 	StaOpr->push("#");
-	StaNum->push(0);    //在数字栈读入一个0，以防止  -()   这种形式的表达式无法计算 
 	
     string nowopr = data->front();  // nowopr 为当前队头的元素 
     data->pop();
@@ -74,14 +74,43 @@ void Calculation::NumCalculator(queue<string> *data)
             }
             if (rel == '>') //栈顶操作符优先级大于当前操作符，则取出栈顶操作符进行计算 
             {
-            	double sum2 = StaNum->top();  //数字栈的栈顶是第二个数字 
-            	StaNum->pop();
-            	double sum1 = StaNum->top();
-            	StaNum->pop();
-            	string oprt = StaOpr->top();
-            	StaOpr->pop();
-            	double temp = oper->Operate(sum1,sum2,oprt);  // 计算结果 
+            	double sum1 = 0;
+				double sum2 = 0;
+				double temp = 0;
+            	string oprt = "\0";
             	
+            	if (!StaNum->empty())
+            	{
+            	    sum2 = StaNum->top();  //数字栈的栈顶是第二个数字 
+            	    StaNum->pop();
+            	}
+            	else
+            	{
+            		error = 3;
+            	}
+            	if (!StaNum->empty())
+            	{
+            	    sum1 = StaNum->top();
+            	    StaNum->pop();
+                }
+                else
+                {
+                	error = 3;
+                }
+                if (!StaOpr->empty())
+                {
+				    oprt = StaOpr->top();
+            	    StaOpr->pop();
+                }
+				else
+				{
+					error = 3;
+				} 
+				if (error == 0)
+				{
+					temp = oper->Operate(sum1,sum2,oprt);  // 计算结果 
+				}
+				
             	if (temp > N) 
             	{
             		error = 1;
@@ -89,7 +118,7 @@ void Calculation::NumCalculator(queue<string> *data)
             	if (oprt == "/" && sum2 == 0)
             	{
             		error = 2;
-            	}
+            	} 
             	
             	StaNum->push(temp);  //把结果录入数字栈 
             }
@@ -116,6 +145,11 @@ void Calculation::PrintAnser()
     if (error == 2)
     {
         printf("数字被零除\n");
+    }
+    
+    if (error == 3)
+    {
+    	printf("ERROR!\n"); 
     }
     
     if (error == 0)

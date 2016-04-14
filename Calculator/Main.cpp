@@ -18,6 +18,7 @@
 #include "scan.h"
 #include "print.h"
 #include "Calculation.h"
+#include "Pretreatment.h"
 
 #include <iostream>
 #include <string.h>
@@ -38,11 +39,12 @@ int main(int argc,char* argv[])
 	    Scan *get = new Scan;
         //Print *wri = new Print;
         Calculation *cal = new Calculation;
+        Pretreatment *pre = new Pretreatment; 
 		bool checkprint = false;
 			
         
         
-        string str="\0";   // 用于储存输入数据的变量 
+        string str="";   // 用于储存输入数据的变量 
         
        	if (argc != 2 && argc != 3)
        	{
@@ -81,8 +83,10 @@ int main(int argc,char* argv[])
 		if (get->BackStringQueue() != NULL)   //判断数据是否合法 
 		{ 
 			//wri->StringPrint(get->BackStringQueue());  // 合法时的输出 
-				
-			cal->NumCalculator(get->BackStringQueue());   // 计算表达式 
+			
+			pre->yuchuli(get->BackStringQueue());  //预处理表达式 
+			
+			cal->NumCalculator(pre->BackStringQueue());   // 计算表达式 
 				
 			if (checkprint)    // 判断是否需要输出表达式 
 			{
@@ -92,14 +96,11 @@ int main(int argc,char* argv[])
 			cal->PrintAnser();
 			
 		} 
-		else
-		{ 	  	 
-			cout << "Error!" << endl;  //  不合法时的输出 
-		}
 		
 		delete get;
 		//delete wri;
 		delete cal; 
+		delete pre;
 		
 		if (argc == 2 || argc == 3)
 		{
