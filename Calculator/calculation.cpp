@@ -1,18 +1,3 @@
- /************************************************************ 
-  FileName: Main.cpp  
-
-  Author: Starset        Version :  1.1        Date:  2016.4.3
-
-  Description:      
-  
-                对读入的队列进行操作，计算出表达式的值 
-
-  Function List:
-            
-			   NumCalculator()   计算表达式
-			   PrintAnser()      输出答案 
-
-*************************************************************/ 
 #include "Calculation.h"
 #include "CheckRelation.h"
 #include "Operation.h"

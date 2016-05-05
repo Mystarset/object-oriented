@@ -1,19 +1,3 @@
- /************************************************************ 
-  FileName: Main.cpp  
-
-  Author: Starset        Version :  1.1        Date:  2016.4.3
-
-  Description:      
-  
-               判断操作符之间的优先级
-			   判断当前字符是操作符还是数字 
-
-  Function List:
-            
-			    isnum() relation()  用于判断优先级
-				isopr() 用于确定是否是操作符 
-
-*************************************************************/ 
 #include "checkrelation.h"
 #include <string>
 
