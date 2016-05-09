@@ -120,26 +120,20 @@ void Calculation::NumCalculator(queue<string> *data)
 	    }
 	}
 }
-void Calculation::PrintAnser()
+
+int Calculation::ReturnAnser()
 {
-	if (error == 1) 
+	if (error)
 	{
-		printf("数字超出运算范围\n"); 
+		return 0;
 	}
-
-    if (error == 2)
-    {
-        printf("数字被零除\n");
-    }
-    
-    if (error == 3)
-    {
-    	printf("ERROR!\n"); 
-    }
-    
-    if (error == 0)
+	else
 	{
-	    cout << StaNum->top() << endl;   //输出 
-    } 
-
+		return StaNum->top();
+	}
 }
+int Calculation::ReturnError()
+{
+	return error;
+}
+

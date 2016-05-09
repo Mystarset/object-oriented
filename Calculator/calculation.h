@@ -39,6 +39,8 @@ class Calculation
 		~Calculation();
 		void NumCalculator(queue<string> *data);
 		void PrintAnser();
+		int ReturnError();
+		int ReturnAnser();
 		
 	protected:
 };

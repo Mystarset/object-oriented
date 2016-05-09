@@ -37,46 +37,41 @@ int main(int argc,char* argv[])
     {
         
 	    Scan *get = new Scan;
-        //Print *wri = new Print;
+        Print *wri = new Print;
         Calculation *cal = new Calculation;
         Pretreatment *pre = new Pretreatment; 
 		bool checkprint = false;
 			
         
         
-        string str="";   // 用于储存输入数据的变量 
-        
-       	if (argc != 2 && argc != 3)
-       	{
-       		cout << "请输入四则运算表达式:" << endl ;
-            cin >> str;
-        	
-            if (str == "exit") 
-		    { 
-			    run = false ; // 判断是否结束 
-			    break;
-            }  
-		    else
-		    {
-			    if (str == "-a")      
-			    {
-			        cin >> str;
-			        checkprint = true;
-			    }
-	        }
-	    }
-	    else
+        string str1 = "",str = "";   // 用于储存输入数据的变量 
+        string in = "";    // 用于存储输入文件的文件名
+		string out = "";   // 用于存储输出文件的文件名 
+	    
+	    if (argc == 2)
 	    {
-	        if (argc == 3)
-	        {
-	            checkprint = true;
-	    	    str = argv[2];
-	        }
-	        else
-	        {
-	    	    str = argv[1];	    		
-	        }
+	    	str1 = argv[1];
 	    }
+	    if (argc == 3)
+	    {
+	    	str1 = argv[2];
+	    	checkprint = true;
+	    }
+	    if (argc == 4)
+	    {
+	    	freopen(argv[2],"r",stdin);
+	    	freopen(argv[3],"w",stdout);
+	    	cin >> str1;
+	    }
+	    
+	    
+	    for (int i = 0; i < str1.length(); i++)
+	    {
+	    	if (str1[i] == '=') break;
+	    	str = str + str1[i];
+	    }
+	    
+	    
 	    
 		get->ToStringQueue(str);  //得到队列 
 			 	 
@@ -87,30 +82,22 @@ int main(int argc,char* argv[])
 			pre->yuchuli(get->BackStringQueue());  //预处理表达式 
 			
 			cal->NumCalculator(pre->BackStringQueue());   // 计算表达式 
+			
+			int error = cal->ReturnError();
+			int anser = cal->ReturnAnser();
 				
-			if (checkprint)    // 判断是否需要输出表达式 
-			{
-				cout << str << "= ";
-			}
-				
-			cal->PrintAnser();
+			wri->PrintAnser(checkprint,error,anser,str1); // 输出答案 
 			
 		} 
 		
 		delete get;
-		//delete wri;
+		delete wri;
 		delete cal; 
 		delete pre;
 		
-		if (argc == 2 || argc == 3)
-		{
-		    break;
-		}
+		break;
 	} 
 			 
-
-    
-
     return 0;	
 	
 } 

@@ -29,7 +29,7 @@ class Print
 		~Print();
 		
 	    void StringPrint(queue<string> *output);
-	    
+	    void PrintAnser(bool checkprint,int error,int anser,string str1);
 	protected:
 };
 
